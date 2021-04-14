@@ -2,12 +2,15 @@ function maxItemAssotiation() {
     //const startArray = [["e", "d"], ["a", "b"], ["a", "c"], ["d", "e"], ["e", "a"] ];
     //const startArray = [["a", "b"], ["a", "c"], ["d", "e"]];
     let startArray = [
+        ['l', 'o'],
+        ['y', 'z', 'p'],
+        ['x', 'r'],
+        ['x', 'm'],
         ['d', 'e'],
         ['e', 'n'],
         ['a', 'b'],
         ['a', 'c'],
-        ['c', 'q'],
-        ['x', 'r']
+        ['c', 'q'],        
     ];
 
     const finalArray = [];
@@ -32,12 +35,12 @@ function maxItemAssotiation() {
            });
            i++;
        }
-       req.sort((a, b) => a.localeCompare(b));
+       req.sort();
        if (req.length > 0)
        finalArray.push(req);
     }
 
-    finalArray.sort((a, b) => b.length - a.length );
+    finalArray.sort((a, b) => b.length - a.length || a[0].localeCompare(b[0]) );
     
     if (finalArray.length > 0){
         console.log('Ответ', finalArray[0])
