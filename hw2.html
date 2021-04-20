@@ -1,14 +1,17 @@
 <html>
 
+<head></head>
+
 <body>
-    <div class="ddd">        
-        <p>Строка 1</p>
-        <p>Строка 2</p>
-        <p>Строка 3</p>
-        <p>Строка 5</p>        
-        <p id="ok">Строка 5</p>
-        <p>Строка 6</p>        
-        <p id="ok">Строка 4</p>
+    <div class="ddd">
+        <span>Строка 1</span>
+        <span>Строка 2</span>
+        <span id="ok">Строка 3</span>
+        <span>Строка 7</span>
+        <p id="ok">Строка 8</p>
+        <span id="ok">Строка 5</span>
+        <span>Строка 6</span>
+        <span id="ok">Строка 4</span>
     </div>
 </body>
 
@@ -21,14 +24,13 @@
         var path = [];
         while (el.nodeType === Node.ELEMENT_NODE) {
             var selector = el.nodeName.toLowerCase();
-            if (el.id) {
-                selector += '#' + el.id;
-            } else {
-                var sib = el, nth = 1;
-                console.log(sib);
-                //while (sib.nodeType === Node.ELEMENT_NODE && (sib = sib.previousSibling) && nth++);
-                //selector += ":nth-child(" + nth + ")";
+
+            let sib = el, nth = 1;
+            while (sib.previousSibling) {
+                sib = sib.previousSibling;
+                if (sib.nodeName.toLowerCase() != '#text') nth++;                
             }
+            selector += ":nth-child(" + nth + ")";
             path.unshift(selector);
             el = el.parentNode;
         }
@@ -36,12 +38,8 @@
     }
 
 
-    console.log(document.getElementById('ok'));
     const cssPath = getPath(document.getElementById('ok'));
-
-    console.log(document.querySelectorAll(cssPath));
     console.log(cssPath);
-    //console.log(document.querySelectorAll());
-    //div:nth-child(2)
+    console.log(document.querySelectorAll(cssPath));
 
 </script>
