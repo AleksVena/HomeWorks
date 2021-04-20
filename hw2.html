@@ -1,0 +1,47 @@
+<html>
+
+<body>
+    <div class="ddd">        
+        <p>Строка 1</p>
+        <p>Строка 2</p>
+        <p>Строка 3</p>
+        <p>Строка 5</p>        
+        <p id="ok">Строка 5</p>
+        <p>Строка 6</p>        
+        <p id="ok">Строка 4</p>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    function getPath(el) {
+        if (!(el instanceof Element)) return;
+        var path = [];
+        while (el.nodeType === Node.ELEMENT_NODE) {
+            var selector = el.nodeName.toLowerCase();
+            if (el.id) {
+                selector += '#' + el.id;
+            } else {
+                var sib = el, nth = 1;
+                console.log(sib);
+                //while (sib.nodeType === Node.ELEMENT_NODE && (sib = sib.previousSibling) && nth++);
+                //selector += ":nth-child(" + nth + ")";
+            }
+            path.unshift(selector);
+            el = el.parentNode;
+        }
+        return path.join(" > ");
+    }
+
+
+    console.log(document.getElementById('ok'));
+    const cssPath = getPath(document.getElementById('ok'));
+
+    console.log(document.querySelectorAll(cssPath));
+    console.log(cssPath);
+    //console.log(document.querySelectorAll());
+    //div:nth-child(2)
+
+</script>
