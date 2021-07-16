@@ -19,6 +19,12 @@ const places = (state = [
           ? { ...pl, favorites: true }
           : pl
       )
+    case 'del_fav':
+      return state.map(pl =>
+        (pl.id === action.id)
+          ? { ...pl, favorites: false }
+          : pl
+      )
     default:
       return state
   }

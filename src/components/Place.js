@@ -2,9 +2,9 @@ import React from 'react'
 
 const Place = ({ onClick, name }) => (
   <li
-    onClick={onClick}
+    
   >
-    {name}
+    {name} <button onClick={onClick}>to fav</button>
   </li>
 )
 

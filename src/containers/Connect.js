@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch  => ({
-  favPlaceAdd: id => dispatch({type: "set_fav", id})
+  favPlaceAdd: id => dispatch({type: "set_fav", id}),
+  favPlaceDel: id => dispatch({type: "del_fav", id})
 })
 
 export default connect(
