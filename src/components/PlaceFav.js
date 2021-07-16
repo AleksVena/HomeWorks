@@ -1,8 +1,8 @@
 import React from 'react'
 
-const PlaceFav = ({ onClick, name }) => (
-  <li
-    
+const PlaceFav = ({ onClick, placeClick, name }) => (
+  <li onClick={placeClick}
+
   >
     {name} <button onClick={onClick}>from fav</button>
   </li>
