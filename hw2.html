@@ -16,30 +16,3 @@
 </body>
 
 </html>
-
-<script>
-
-    function getPath(el) {
-        if (!(el instanceof Element)) return;
-        var path = [];
-        while (el.nodeType === Node.ELEMENT_NODE) {
-            var selector = el.nodeName.toLowerCase();
-
-            let sib = el, nth = 1;
-            while (sib.previousSibling) {
-                sib = sib.previousSibling;
-                if (sib.nodeName.toLowerCase() != '#text') nth++;                
-            }
-            selector += ":nth-child(" + nth + ")";
-            path.unshift(selector);
-            el = el.parentNode;
-        }
-        return path.join(" > ");
-    }
-
-
-    const cssPath = getPath(document.getElementById('ok'));
-    console.log(cssPath);
-    console.log(document.querySelectorAll(cssPath));
-
-</script>
