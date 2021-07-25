@@ -1,11 +1,16 @@
 import React from 'react';
-import Connect from './containers/Connect';
+import logo from './logo.svg';
+import { Weather } from './features/Weather';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Connect />
-     
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <Weather />
+        
+      </header>
     </div>
   );
 }

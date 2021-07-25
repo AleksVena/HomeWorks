@@ -6,7 +6,7 @@ module.exports = {
   entry: "./src/index.tsx",
   devtool: "source-map",
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"]
+    extensions: [".ts", ".tsx", ".json"]
   },
   output: {
     path: path.join(__dirname, "/dist"),
