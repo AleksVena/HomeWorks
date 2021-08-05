@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+//import * as serviceWorker from './serviceWorker';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-import { Weather } from './features/Weather';
+import { WeatherRoute } from './features/WeatherRoute';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -20,7 +20,7 @@ ReactDOM.render(
         <App />
         <Switch>
           <Route exact path="/"></Route>
-          <Route path="/weather/:id"><Weather /></Route>
+          <Route path="/weather/:CityName"><WeatherRoute /></Route>
           <Route><Redirect to="/"></Redirect></Route>
         </Switch>
       </Router>
@@ -29,7 +29,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+//serviceWorker.unregister();

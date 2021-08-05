@@ -77,3 +77,7 @@
   opacity: 1;
   transition: 0s;
 }
+
+.autocomplete{
+  width: 300px;
+}
