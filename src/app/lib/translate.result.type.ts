@@ -21,3 +21,13 @@ export interface TranslateResult{
 export interface Inputed{
     word: string;
 }
+
+export interface Translate{
+    id: number;
+    date: Date;
+    ru: string;
+    en: string;
+    es: string;
+    it: string;
+    ar: string;
+  }
