@@ -1,0 +1,22 @@
+.tree {
+    background: #966F33;
+    width: 15px;
+    padding: 5px;
+    border: 2px solid grey;
+    margin: 10px 25px;
+    text-align: center;
+    color: yellow;
+}
+
+.leaf {
+    position: relative;
+    background: #526E2A;
+    width: 15px;
+    height: 25px;
+    padding: 5px;
+    border: 2px solid grey;
+    margin: 5px 15px;
+    border-radius: 0 15px 5px 15px;
+    text-align: center;
+    color: white;
+}
