@@ -1,9 +1,9 @@
-export interface ResponseData{
+export interface ResponseData {
     translatedText: string;
     match: number;
 }
 
-export interface Matches{
+export interface Matches {
     id: number;
     segment: string;
     translation: string;
@@ -11,23 +11,28 @@ export interface Matches{
     match: number;
 }
 
-export interface TranslateResult{
+export interface TranslateResult {
     responseStatus: number;
     responseData: ResponseData;
     matches: Matches[];
-    responderId: string;    
+    responderId: string;
 }
 
-export interface Inputed{
+export interface Inputed {
     word: string;
 }
 
-export interface Translate{
+export interface Data {
+    lang: string;
+    text: string;
+}
+
+export interface Translate {
     id: number;
     date: Date;
-    ru: string;
-    en: string;
-    es: string;
-    it: string;
-    ar: string;
-  }
+    values: Data[]; 
+}
+
+export const languages: string[] = [
+    'ru', 'en', 'it', 'es', 'ar'
+];
