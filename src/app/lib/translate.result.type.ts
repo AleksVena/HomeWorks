@@ -32,7 +32,3 @@ export interface Translate {
     date: Date;
     values: Data[]; 
 }
-
-export const languages: string[] = [
-    'ru', 'en', 'it', 'es', 'ar'
-];

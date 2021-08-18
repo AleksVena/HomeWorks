@@ -1,4 +1,14 @@
 <div class="mat-elevation-z8">
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Add word
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <input type="text" [(ngModel)]="word" required><br/><br/><br/>
+        <button mat-raised-button (click)="loadTranslate()" color="primary">Translate</button>
+    </mat-expansion-panel>
+
     <table mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="Id">
@@ -23,15 +33,3 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
     </mat-paginator>
 </div>
-
-
-<!-- <p>jfjhgc</p>
-
-<input type="text" [(ngModel)]="inputed.word" name="name">
-<span>{{ inputed.word }}</span>
-
-<button (click)="loadTranslate()">Перевести</button>
-
-<span *ngIf="result">
-    {{result.translatedText}}
-</span> -->

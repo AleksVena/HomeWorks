@@ -14,13 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
-    AppComponent, RecentlyAddedComponent
+    AppComponent, RecentlyAddedComponent, SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +34,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
+    MatExpansionModule,
+    MatSelectModule,
   ],
   providers: [],
   schemas: [],
