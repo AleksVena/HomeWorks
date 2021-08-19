@@ -1,1 +1,14 @@
-<p>go works!</p>
+<h1 *ngIf="words===0">Before fill ref with words</h1>
+<div *ngIf="words>0">
+    <h1>Testing</h1>
+    <h2> Word #{{word}} of {{words}} </h2>
+    <h3> Translate it: {{checkingWord}} on {{lang}}</h3>
+
+
+    <input type="text" [(ngModel)]="testing" required><br />
+    <h4 *ngIf="showError" class="redColor">Incorrect</h4>
+    <h4 *ngIf="showSuccess" class="greenColor">Correct</h4>
+    <br />
+    <button mat-raised-button (click)="check()" color="primary">Check</button>
+    <button mat-raised-button (click)="goToNext()" color="primary" class="ml-10">Next</button>
+</div>

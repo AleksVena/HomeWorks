@@ -17,10 +17,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { SettingsComponent } from './settings/settings.component';
+import { GoComponent } from './go/go.component';
 
 @NgModule({
   declarations: [
-    AppComponent, RecentlyAddedComponent, SettingsComponent
+    AppComponent, RecentlyAddedComponent, SettingsComponent, GoComponent
   ],
   imports: [
     BrowserModule,

@@ -25,7 +25,8 @@ export class SettingsComponent implements OnInit {
   }
 
   saveSettings(){
-    
+    this.dbService.setLanguage(this.selected);
+    this.dbService.setNumberOfWords(this.nbOfWords.toString());
   }
 
 }
