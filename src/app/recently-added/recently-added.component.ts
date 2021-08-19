@@ -27,6 +27,16 @@ export class RecentlyAddedComponent {
 
   }
 
+  DeleteElement(element: Translate) {
+    console.log(' 5 element', element);
+    const index = this.TranslateList.indexOf(element, 0);
+    if (index > -1) {
+      this.TranslateList.splice(index, 1);
+    }
+    this.reloadPage();
+    this.saveToLocalStorage();
+  }
+
   loadTranslate() {
     const words = this.word.split(' ');
     const defaultLang = DefaultLang;
@@ -82,12 +92,12 @@ export class RecentlyAddedComponent {
 
   ngAfterViewInit() {
     this.dbService
-    .getWordList()
-    .subscribe(
-      (res) => {
-        this.TranslateList = res;
-      }
-    );
+      .getWordList()
+      .subscribe(
+        (res) => {
+          this.TranslateList = res;
+        }
+      );
 
     this.reloadPage();
   }

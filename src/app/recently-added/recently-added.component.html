@@ -18,7 +18,7 @@
 
         <ng-container matColumnDef="Date">
             <th mat-header-cell *matHeaderCellDef> Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.date}} <button (click)="DeleteElement(element)">delete</button> </td>
         </ng-container>
 
         <ng-container *ngFor="let item of languages" matColumnDef="{{item}}">
