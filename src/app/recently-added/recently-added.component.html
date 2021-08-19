@@ -1,0 +1,35 @@
+<div class="mat-elevation-z8">
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Add word
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <input type="text" [(ngModel)]="word" required><br/><br/><br/>
+        <button mat-raised-button (click)="loadTranslate()" color="primary">Translate</button>
+    </mat-expansion-panel>
+
+    <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Date">
+            <th mat-header-cell *matHeaderCellDef> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd.MM.yyyy'}} <button (click)="DeleteElement(element)">delete</button> </td>
+        </ng-container>
+
+        <ng-container *ngFor="let item of languages" matColumnDef="{{item}}">
+            <th mat-header-cell *matHeaderCellDef> {{ item }} </th>
+            <td mat-cell *matCellDef="let element"> {{getTextByLang(item, element)}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+</div>
