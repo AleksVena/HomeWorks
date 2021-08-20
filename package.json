@@ -1,0 +1,19 @@
+{
+    "name": "node_tree",
+    "version": "1.0.0",
+    "description": "",
+    "main": "tree.js",
+    "scripts": {
+        "tree": "node tree.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AleksVena/HomeWorks.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AleksVena/HomeWorks/issues"
+    },
+    "homepage": "https://github.com/AleksVena/HomeWorks#readme"
+}
