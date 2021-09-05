@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs';
 import { Translate } from './lib/translate.result.type';
+import {LocalStorageService} from 'ngx-webstorage'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbService {
-  constructor() { }
+  constructor(private storage:LocalStorageService) { }
 
   getWordList(): Observable<Translate[]> {
-    const dataFromStorage = localStorage.getItem('wordList');
+    const dataFromStorage = this.storage.retrieve('wordList');
     let TranslateList: Translate[] = [];
     if (dataFromStorage)
       TranslateList = JSON.parse(dataFromStorage);
@@ -20,7 +21,7 @@ export class DbService {
   }
 
   setWordList(data: Translate[]): Observable<boolean> {
-    localStorage.setItem('wordList', JSON.stringify(data));
+    this.storage.store('wordList', JSON.stringify(data));
     return new Observable((observer: Subscriber<boolean>) => {
       observer.next(true);
       observer.complete();
@@ -28,7 +29,7 @@ export class DbService {
   }
 
   getNumberOfWords(): Observable<string> {
-    const dataFromStorage = localStorage.getItem('numberOfWords');
+    const dataFromStorage = this.storage.retrieve('numberOfWords');
     let numberOfWords: string = '5';
     if (dataFromStorage)
       numberOfWords = dataFromStorage;
@@ -39,7 +40,7 @@ export class DbService {
   }
 
   setNumberOfWords(data: string): Observable<boolean> {
-    localStorage.setItem('numberOfWords', data);
+    this.storage.store('numberOfWords', data);
     return new Observable((observer: Subscriber<boolean>) => {
       observer.next(true);
       observer.complete();
@@ -47,7 +48,7 @@ export class DbService {
   }
 
   getLanguage(): Observable<string> {
-    const dataFromStorage = localStorage.getItem('language');
+    const dataFromStorage = this.storage.retrieve('language');
     let language: string = 'en';
     if (dataFromStorage)
     language = dataFromStorage;
@@ -58,7 +59,7 @@ export class DbService {
   }
 
   setLanguage(data: string): Observable<boolean> {
-    localStorage.setItem('language', data);
+    this.storage.store('language', data);
     return new Observable((observer: Subscriber<boolean>) => {
       observer.next(true);
       observer.complete();

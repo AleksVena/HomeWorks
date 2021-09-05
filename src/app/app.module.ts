@@ -18,13 +18,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { SettingsComponent } from './settings/settings.component';
 import { GoComponent } from './go/go.component';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
     AppComponent, RecentlyAddedComponent, SettingsComponent, GoComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -37,6 +38,7 @@ import { GoComponent } from './go/go.component';
     MatPaginatorModule,
     MatExpansionModule,
     MatSelectModule,
+    NgxWebstorageModule.forRoot({ prefix: '', separator: ''}),
   ],
   providers: [],
   schemas: [],
