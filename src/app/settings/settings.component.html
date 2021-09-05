@@ -1,0 +1,22 @@
+<form class="px-10">
+    <mat-form-field appearance="fill" color="primary">
+        <mat-label>Language</mat-label>
+        <mat-select [(value)]="selected">
+            <mat-option *ngFor="let lang of languages" [value]="lang">
+                {{lang}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill" color="primary">
+        <mat-label>nb. of words</mat-label>
+        <mat-select [(value)]="nbOfWords">
+            <mat-option *ngFor="let numb of NbOfWords" [value]="nbOfWords">
+                {{numb}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br /> <br />
+    <!-- <button mat-raised-button routerLink="/recently-added">Back</button> -->
+    <button mat-raised-button color="primary" (click)="saveSettings()">Save</button>
+</form>
