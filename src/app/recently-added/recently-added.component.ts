@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from '../api.service';
 import { Inputed, ResponseData, Translate } from '../lib/translate.result.type';
 import { DbService, DefaultLang, Languages } from '../db.service';
+import { TranslateService } from '../translate.service';
 
 
 @Component({
@@ -23,57 +24,16 @@ export class RecentlyAddedComponent {
   displayedColumns: string[] = ['Id', 'Date', ...this.languages];
   @ViewChild(MatPaginator) paginator: MatPaginator = null as any;
 
-  constructor(private apiService: ApiService, private dbService: DbService) {
+  constructor(private apiService: ApiService, private dbService: DbService, private translateService: TranslateService) {
 
   }
 
   DeleteElement(element: Translate) {
-    console.log(' 5 element', element);
-    const index = this.TranslateList.indexOf(element, 0);
-    if (index > -1) {
-      this.TranslateList.splice(index, 1);
-    }
-    this.reloadPage();
-    this.saveToLocalStorage();
+    this.dbService.DeleteElement(element);
   }
 
   loadTranslate() {
-    const words = this.word.split(' ');
-    const defaultLang = DefaultLang;
-    words.forEach(element => {
-      const searchecdWord = this.TranslateList.find(item => item.values.filter(i => i.lang === defaultLang)[0].text.toLowerCase() === element.toLowerCase());
-      let id: number = null as any;
-      if (searchecdWord) { id = searchecdWord.id } else {
-        const last: number = Math.max(...this.TranslateList.map(i => i.id));
-        if (last && last > 0) { id = last + 1; }
-        else {
-          id = 1
-        }
-        this.TranslateList.push({ id: id, date: new Date(), values: [{ lang: defaultLang, text: element }] });
-        this.saveToLocalStorage();
-      }
-      this.reloadPage();
-
-      this.languages.filter(item => item.toLowerCase() !== defaultLang).forEach(lang => {
-        const updatedWord = this.TranslateList.filter(el => el.id === id)[0];
-        const translateExist = updatedWord.values.find(word => word.lang === lang);
-        if (!translateExist)
-          this.apiService
-            .getTranslated(element, defaultLang, lang)
-            .subscribe(
-              (res) => {
-                if (res.responseStatus && res.responseStatus === 200) {
-                  const updatedWord = this.TranslateList.find(el => el.id === id);
-                  if (updatedWord) {
-                    updatedWord.values.push({ lang: lang, text: res.responseData.translatedText.toLowerCase() });
-                    this.saveToLocalStorage();
-                    this.reloadPage();
-                  }
-                }
-              }
-            );
-      });
-    });
+    this.translateService.loadTranslate(this.word);
   }
 
 
@@ -86,20 +46,12 @@ export class RecentlyAddedComponent {
     this.dataSource.paginator = this.paginator;
   }
 
-  saveToLocalStorage() {
-    this.dbService.setWordList(this.TranslateList);
-  }
-
   ngAfterViewInit() {
-    this.dbService
-      .getWordList()
-      .subscribe(
-        (res) => {
-          this.TranslateList = res;
-        }
-      );
-
-    this.reloadPage();
+    this.dbService.words$.subscribe((res: Translate[]) => {
+      this.TranslateList = res;
+      this.reloadPage();
+    })
+    this.dbService.loadList();
   }
 
   getTextByLang(lang: string, data: Translate) {

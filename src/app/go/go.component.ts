@@ -23,20 +23,18 @@ export class GoComponent implements OnInit {
   constructor(private dbService: DbService) { }
 
   ngOnInit(): void {
-    this.dbService
-      .getWordList()
-      .subscribe(
-        (res) => {
-          this.list = res;
-          if (res.length > 0) {
-            this.word = 1;
-            this.words = res.length;
-            this.curTr = res[0];
-            this.loadLangs();
-          }
-        }
-      );
-    this.dbService.getLanguage().subscribe((res) => {
+    this.dbService.words$.subscribe((res: Translate[]) => {
+      this.list = res;
+      if (res.length > 0) {
+        this.word = 1;
+        this.words = res.length;
+        this.curTr = res[0];
+        this.loadLangs();
+      }
+    })
+    
+    this.dbService.loadList();
+    this.dbService.getLanguage().subscribe((res: string) => {
       this.lang = res;
     });
   }
