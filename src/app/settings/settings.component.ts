@@ -8,7 +8,7 @@ import { DbService, DefaultLang, Languages } from '../db.service';
 })
 export class SettingsComponent implements OnInit {
 
-  languages = Languages.filter(lang => lang !== DefaultLang);
+  languages = Languages.filter((lang: any) => lang !== DefaultLang);
   selected: string = this.languages[0];
   nbOfWords: number = 5;
   NbOfWords: number[] = [5, 10, 15, 20];
@@ -16,10 +16,10 @@ export class SettingsComponent implements OnInit {
   constructor(private dbService: DbService) { }
 
   ngOnInit(): void {
-    this.dbService.getLanguage().subscribe((res) => {
+    this.dbService.getLanguage().subscribe((res: string) => {
       this.selected = res;
     });
-    this.dbService.getNumberOfWords().subscribe((res) => {
+    this.dbService.getNumberOfWords().subscribe((res: string) => {
       this.nbOfWords = Number.parseInt(res);
     });
   }

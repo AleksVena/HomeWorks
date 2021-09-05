@@ -24,7 +24,7 @@ export class RecentlyAddedComponent {
   displayedColumns: string[] = ['Id', 'Date', ...this.languages];
   @ViewChild(MatPaginator) paginator: MatPaginator = null as any;
 
-  constructor(private apiService: ApiService, private dbService: DbService, private translateService: TranslateService) {
+  constructor(private dbService: DbService, private translateService: TranslateService) {
 
   }
 
