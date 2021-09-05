@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { DbService } from '../db.service';
@@ -7,24 +8,23 @@ import { SettingsComponent } from './settings.component';
 describe('SettingsComponent', () => {
   let component: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
-  let DbServiceStub: Partial<DbService>;
-  let DbServiceSpy: jasmine.SpyObj<DbService>;
+  let getQuoteSpy: jasmine.Spy;
+  let testQuote: string;
 
   beforeEach(async () => {
-    const spyDbService = jasmine.createSpyObj('DbService', ['loadList']);
+    testQuote = 'Test Quote';
+    const DbServiceSpy = jasmine.createSpyObj('DbService', ['getQuote']);
+    getQuoteSpy = DbServiceSpy.getQuote.and.returnValue(of(testQuote));
+
     TestBed.configureTestingModule({
       declarations: [SettingsComponent],
-      providers: [
-        { provide: DbService, useValue: spyDbService }
-      ]
-    })
-    DbServiceSpy = TestBed.inject(DbService) as jasmine.SpyObj<DbService>;
-  });
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [{ provide: DbService, useValue: DbServiceSpy }]
+    });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(SettingsComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+
   });
 
   it('should create', () => {

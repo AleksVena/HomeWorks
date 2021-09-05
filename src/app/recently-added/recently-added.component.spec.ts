@@ -1,4 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { DbService } from '../db.service';
 import { TranslateService } from '../translate.service';
 
@@ -6,30 +8,26 @@ import { RecentlyAddedComponent } from './recently-added.component';
 
 describe('RecentlyAddedComponent', () => {
   let component: RecentlyAddedComponent;
-  let fixture: ComponentFixture<RecentlyAddedComponent>; 
-  let DbServiceStub: Partial<DbService>;
-  let TranslateServiceStub: Partial<TranslateService>;  
+  let fixture: ComponentFixture<RecentlyAddedComponent>;
+  let getQuoteSpy: jasmine.Spy;
+  let testQuote: string;
 
   beforeEach(async () => {
-    DbServiceStub = {};
-    TranslateServiceStub = {};
-    await TestBed.configureTestingModule({
-      declarations: [ RecentlyAddedComponent ],
-      providers: [
-        { provide: TranslateService, useValue: TranslateServiceStub },
-        { provide: DbService, useValue: DbServiceStub }
-      ]
-    })
-    .compileComponents();
-    TestBed.inject(TranslateService);
-    TestBed.inject(DbService);
-  });
+    testQuote = 'Test Quote';
+    const DbServiceSpy = jasmine.createSpyObj('DbService', ['getQuote']);
+    const TranslateServiceSpy = jasmine.createSpyObj('TranslateService', ['getQuote']);
+    getQuoteSpy = DbServiceSpy.getQuote.and.returnValue(of(testQuote));
 
-  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [RecentlyAddedComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [{ provide: DbService, useValue: DbServiceSpy }, { provide: TranslateService, useValue: TranslateServiceSpy }]
+    });
+
     fixture = TestBed.createComponent(RecentlyAddedComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
+
 
   it('should create', () => {
     expect(component).toBeTruthy();
